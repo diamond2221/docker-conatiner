@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS db_instagram;
+CREATE DATABASE IF NOT EXISTS db_wechat_record;
