@@ -30,7 +30,7 @@ services:
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   go-app:
-    build: .
+    image:  registry.cn-shenzhen.aliyuncs.com/diamond2221/diamond2221_hub:latest
     ports:
       - "8000"
     depends_on:
