@@ -30,7 +30,7 @@ services:
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   go-app:
-    image:  registry.cn-shenzhen.aliyuncs.com/diamond2221/diamond2221_hub:latest
+    image:  api-diamond2221-com:latest
     ports:
       - "8000"
     depends_on:
@@ -38,19 +38,13 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    # environment:
-      # - REDIS_HOST=redis
-      # - REDIS_PORT=6379
-      # - MYSQL_HOST=db
-      # - MYSQL_PORT=3306
-      # - MYSQL_USER=root
-      # - MYSQL_PASSWORD=981220Zy+++
-      # - MYSQL_DB=db_instagram
 
   nginx:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./site1/:/usr/share/nginx/html/site1
+      - ./site2/:/usr/share/nginx/html/site2
     ports:
       - "80:80"
     depends_on:
