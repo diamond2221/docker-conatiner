@@ -8,6 +8,7 @@ services:
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
@@ -30,7 +31,7 @@ services:
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   go-app:
-    image:  api-diamond2221-com:latest
+    image:  registry.cn-shenzhen.aliyuncs.com/diamond2221/diamond2221_hub:0.0.14
     ports:
       - "8000"
     depends_on:
@@ -43,9 +44,10 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./site1/:/usr/share/nginx/html/site1
-      - ./site2/:/usr/share/nginx/html/site2
     ports:
       - "80:80"
     depends_on:
       - go-app
+
+volumes:
+  mysql-data:
